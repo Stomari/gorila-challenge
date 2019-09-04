@@ -13,11 +13,11 @@ RUN npm install
 # Copy the the rest of directory contents
 COPY . .
 
-# Make port 3000 available to the world outside this container
-EXPOSE 3000
+# Make port 8000 available to the world outside this container
+EXPOSE 8000
 
 # Define environment variable
-ENV PORT 3000
+ENV PORT 8000
 ENV MONGODB_URI mongodb://mongo:27017/gorila
 
 # Run app.py when the container launches
