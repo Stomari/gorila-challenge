@@ -4,8 +4,8 @@ const { Schema } = mongoose;
 
 const investimentSchema = new Schema({
   type: { type: String, required: true, enum: ['variavel', 'fixa'] },
-  value: { type: Number, required: true },
-  date: { type: Date, required: true },
+  value: { type: String, required: true },
+  date: { type: String, required: true },
 }, {
   timestamps: true,
 });
