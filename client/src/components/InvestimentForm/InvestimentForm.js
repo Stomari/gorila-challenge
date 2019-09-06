@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const InvestimentForm = () => {
+const InvestimentForm = ({ fetchInvestiments }) => {
   const [type, setType] = useState('fixa');
   const [value, setValue] = useState('');
   const [date, setDate] = useState('');
@@ -15,6 +15,7 @@ const InvestimentForm = () => {
         setValue('');
         setDate('');
         setErrorMessage(false);
+        fetchInvestiments();
       })
       .catch((error) => {
         setErrorMessage(true)
@@ -33,7 +34,7 @@ const InvestimentForm = () => {
         <label htmlFor="value">Valor</label>
         <input name="value" type="number" value={value} onChange={(event) => setValue(event.target.value)} />
         <label htmlFor="date">Data da Compra</label>
-        <input name="date" type="date" value={date} onChange={(event) => setDate(event.target.value)} />
+        <input name="date" type="date" min="1700-01-01" max="3000-01-01" value={date} onChange={(event) => setDate(event.target.value)} />
         <button type="submit">Adicionar</button>
       </form>
       {
