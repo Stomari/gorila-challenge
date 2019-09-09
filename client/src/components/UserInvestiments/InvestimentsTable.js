@@ -16,7 +16,7 @@ const InvestimentsTable = ({ investimentInfo, deleteInvestiment }) => {
               <tr key={element._id}>
                 <td>{element.date}</td>
                 <td>{element.value}</td>
-                <td><button onClick={() => deleteInvestiment(element._id)}>Delete</button></td>
+                <td><img className="delete" onClick={() => deleteInvestiment(element._id)} src="./images/trash.png" alt="Trash Icon" /></td>
               </tr>
             )
           })

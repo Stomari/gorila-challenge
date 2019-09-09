@@ -1,3 +1,36 @@
 .pie-chart {
-  width: 500px;
+  @include displayLocal(center);
+  align-items: center;
+  padding: 30px 0 30px 0;
+
+  .pie-info {
+    padding-right: 50px;
+    
+    .fixed-legend {
+      background-color: $bg-blue;
+      width: 30px;
+      height: 30px;
+    }
+    .variable-legend {
+      background-color: $bg-green;
+      width: 30px;
+      height: 30px;
+    }
+    h4 {
+      font-weight: normal;
+      font-size: 1.4rem;
+      margin-top: 5px;
+      padding-left: 5px;
+    }
+  }
+
+  .chart {
+    width: 300px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .pie-chart {
+    flex-direction: column;
+  }
 }

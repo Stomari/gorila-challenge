@@ -1,0 +1,56 @@
+.investiments {
+  @include displayLocal(center);
+  align-items: center;
+  flex-direction: column;
+  margin: 40px 0 100px 0;
+
+  .invest-table {
+    width: 900px;
+    border: 2px solid black;
+    .table-toggle {
+      cursor: pointer;
+      border-bottom: 2px solid black;
+      padding: 20px 0 0 20px;
+      h2 {
+        margin-top: 0;
+      }
+    }
+    .fixed-title {
+      background-color: $bg-blue;
+    }
+    .variable-title {
+      background-color: $bg-green;
+    }
+  }
+
+  table {
+    border-collapse: collapse;
+    th, td {
+      border: 1px solid black;
+      padding: 10px 10px 10px 10px;
+      font-size: 1.2rem;
+    }
+    th:nth-child(1) {
+      width: 70%;
+    }
+    th:nth-child(2) {
+      width: 25%;
+    }
+    td {
+      text-align: center;
+    }
+    .delete {
+      width: 30px;
+      cursor: pointer;
+    }
+  }
+
+}
+
+@media (max-width: 1000px) {
+  .investiments {
+    .invest-table {
+      width: 90vw;
+    }
+  }
+}

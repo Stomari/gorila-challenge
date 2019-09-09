@@ -5,12 +5,20 @@ const PieChart = ({ fixedIncome, variableIncome }) => {
   const fixedPercentage = parseFloat(((fixedIncome.length * 100) / (fixedIncome.length + variableIncome.length)).toFixed(2));
   const variablePercentage = parseFloat(((variableIncome.length * 100) / (fixedIncome.length + variableIncome.length)).toFixed(2));
   
-  if (fixedPercentage && variablePercentage) {
+  if (fixedPercentage || variablePercentage) {
     return (
-      <div className="pie-chart">
-        <h4>{fixedPercentage}% da carteira em renda fixa.</h4>
-        <h4>{variablePercentage}% da carteira em renda variável.</h4>
-        <ReactChart data={[
+      <section className="pie-chart">
+        <div className="pie-info">
+          <div className="row">
+            <div className="fixed-legend"></div>
+            <h4><strong>{fixedPercentage}%</strong> da carteira em renda fixa</h4>
+          </div>
+          <div className="row">
+            <div className="variable-legend"></div>
+            <h4><strong>{variablePercentage}%</strong> da carteira em renda variável</h4>
+          </div>
+        </div>
+        <ReactChart className="chart" data={[
           {
             title: 'fixed income',
             value: fixedPercentage,
@@ -23,7 +31,7 @@ const PieChart = ({ fixedIncome, variableIncome }) => {
           },
         ]}
         />
-      </div>
+      </section>
     )
   } else {
     return (

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './App.scss';
+import './style/App.scss';
+import Header from './components/Header/Header';
 import InvestimentForm from './components/InvestimentForm/InvestimentForm';
 import UserInvestiments from './components/UserInvestiments/UserInvestiments';
 import PieChart from './components/PieChart/PieChart';
@@ -30,9 +31,10 @@ const App = () => {
 
   return (
     <div className="App">
+      <Header />
+      <PieChart fixedIncome={fixedIncome} variableIncome={variableIncome} />
       <InvestimentForm fetchInvestiments={fetchInvestiments} />
       <UserInvestiments fixedIncome={fixedIncome} variableIncome={variableIncome} deleteInvestiment={deleteInvestiment} />
-      <PieChart fixedIncome={fixedIncome} variableIncome={variableIncome} />
     </div>
   );
 }

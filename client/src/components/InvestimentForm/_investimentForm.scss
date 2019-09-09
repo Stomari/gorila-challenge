@@ -1,0 +1,54 @@
+.investiment-form {
+  @include displayLocal(center);
+
+  form {
+    border: 2px solid black;
+    border-radius: 15px;
+    padding: 20px 20px 20px 20px;
+
+    .form-title {
+      h4 {
+        margin-top: 0;
+        font-size: 1.2rem;
+      }
+    }
+
+    .form-inputs {
+      display: flex;
+
+      .inputs {
+        padding-right: 20px;
+      }
+      button {
+        background-image: linear-gradient(to right, $bg-blue, $bg-green);
+        border: none;
+        border-radius: 20px;
+        font-size: 1.2rem;
+        padding: 10px;
+        cursor: pointer;
+        &:focus {
+          outline: none;
+        }
+        &:hover {
+          background-image: linear-gradient(to right, $bg-green, $bg-blue);
+        }
+      }
+    }
+
+    .error {
+      font-weight: bold;
+      color: red;
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  .investiment-form {
+    .form-inputs {
+      flex-direction: column;
+      .inputs {
+        padding-bottom: 10px;
+      }
+    }
+  }
+}

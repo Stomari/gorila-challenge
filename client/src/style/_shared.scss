@@ -1,0 +1,12 @@
+// Font family
+$ff-body: "Arial", Helvetica, sans-serif;
+
+// Background colors
+$bg-blue: rgb(80, 194, 197);
+$bg-green: rgb(106, 222, 146);
+
+// Centralize content
+@mixin displayLocal($where) {
+  display: flex;
+  justify-content: $where;
+}
