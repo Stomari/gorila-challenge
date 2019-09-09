@@ -1,0 +1,14 @@
+@import "./shared";
+@import "../components/Header/header";
+@import "../components/PieChart/pieChart";
+@import "../components/InvestimentForm/investimentForm";
+@import "../components/UserInvestiments/userInvestiments";
+
+body {
+  margin: 0;
+  font-family: $ff-body;
+}
+
+.row {
+  display: flex;
+}
