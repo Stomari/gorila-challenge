@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-const investimentSchema = new Schema({
+const investmentSchema = new Schema({
   type: { type: String, required: true, enum: ['variavel', 'fixa'] },
   value: { type: String, required: true },
   date: { type: String, required: true },
@@ -10,5 +10,5 @@ const investimentSchema = new Schema({
   timestamps: true,
 });
 
-const Investiment = mongoose.model('Investiment', investimentSchema);
-module.exports = Investiment;
+const Investment = mongoose.model('Investment', investmentSchema);
+module.exports = Investment;

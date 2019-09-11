@@ -2,7 +2,7 @@ const request = require('supertest');
 const chai = require('chai');
 const mongoose = require('mongoose');
 const app = require('../app');
-const Investiment = require('../models/Investiment');
+const Investment = require('../models/Investment');
 
 const { expect } = chai;
 
@@ -11,15 +11,15 @@ before((done) => {
     .connect('mongodb://localhost/test', { useNewUrlParser: true })
     .then((db) => {
       console.log(`Connected to Mongo! Database name: "${db.connections[0].name}"`);
-      Investiment.collection.remove()
+      Investment.collection.remove()
         .then(() => {
-          const newInvestiment = new Investiment({
+          const newInvestment = new Investment({
             type: 'fixa',
             value: 'R$100,00',
             date: '2019-09-01',
           });
 
-          newInvestiment.save()
+          newInvestment.save()
             .then(() => done())
             .catch((error) => console.log(error));
 
@@ -31,10 +31,10 @@ before((done) => {
     });
 });
 
-describe('Investiment routes', () => {
-  describe('GET /investiments', () => {
-    it('should return all investiments', (done) => {
-      request(app).get('/api/investiments')
+describe('Investment routes', () => {
+  describe('GET /investments', () => {
+    it('should return all investments', (done) => {
+      request(app).get('/api/investments')
         .end((err, res) => {
           if (err) throw err;
           expect(res.status).to.equal(200);
@@ -47,30 +47,30 @@ describe('Investiment routes', () => {
     });
   });
 
-  describe('POST /investiments', () => {
-    it('should create an investiments', (done) => {
-      request(app).post('/api/investiments')
+  describe('POST /investments', () => {
+    it('should create an investments', (done) => {
+      request(app).post('/api/investments')
         .send({ type: 'variavel', value: '200', date: '2019-09-02' })
         .end((err, res) => {
           if (err) throw err;
           expect(res.status).to.equal(200);
           expect(res.body).to.be.an('object');
-          expect(res.body.message).to.be.equal('Investiment created!');
+          expect(res.body.message).to.be.equal('Investment created!');
           done();
         });
     });
   });
 
-  describe('DELETE /investiments/:investimentID', () => {
-    it('should delete specified investiment', (done) => {
-      Investiment.findOne({ value: 'R$100,00' })
+  describe('DELETE /investments/:investmentID', () => {
+    it('should delete specified investment', (done) => {
+      Investment.findOne({ value: 'R$100,00' })
         .then((response) => {
-          request(app).delete(`/api/investiments/${response.id}`)
+          request(app).delete(`/api/investments/${response.id}`)
             .end((err, res) => {
               if (err) throw err;
               expect(res.status).to.equal(200);
               expect(res.body).to.be.an('object');
-              expect(res.body.message).to.be.equal(`Investiment with ID ${response.id} deleted successfully.`);
+              expect(res.body.message).to.be.equal(`Investment with ID ${response.id} deleted successfully.`);
               done();
             });
         })

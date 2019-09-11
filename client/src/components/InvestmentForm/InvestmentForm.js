@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const InvestimentForm = ({ fetchInvestiments }) => {
+const InvestmentForm = ({ fetchInvestments }) => {
   const [type, setType] = useState('');
   const [value, setValue] = useState('');
   const [date, setDate] = useState('');
@@ -9,13 +9,13 @@ const InvestimentForm = ({ fetchInvestiments }) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    axios.post(`${process.env.REACT_APP_API_URL}/api/investiments`, { type, value, date })
+    axios.post(`${process.env.REACT_APP_API_URL}/api/investments`, { type, value, date })
       .then(() => {
         setType('');
         setValue('');
         setDate('');
         setErrorMessage(false);
-        fetchInvestiments();
+        fetchInvestments();
       })
       .catch((error) => {
         setErrorMessage(true)
@@ -24,7 +24,7 @@ const InvestimentForm = ({ fetchInvestiments }) => {
   }
 
   return (
-    <section className="investiment-form">
+    <section className="investment-form">
       <form onSubmit={(event) => submitHandler(event)}>
         <div className="form-title">
           <h4>Adicionar novo investimento:</h4>
@@ -56,4 +56,4 @@ const InvestimentForm = ({ fetchInvestiments }) => {
   )
 }
 
-export default InvestimentForm;
+export default InvestmentForm;

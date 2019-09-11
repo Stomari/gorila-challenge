@@ -13,16 +13,16 @@
   ],
   "tags": [
     {
-      "name": "investiments"
+      "name": "investments"
     }
   ],
   "paths": {
-    "/api/investiments": {
+    "/api/investments": {
       "get": {
         "tags": [
-          "investiments"
+          "investments"
         ],
-        "summary": "Returns all Investiments",
+        "summary": "Returns all Investments",
         "responses": {
           "200": {
             "description": "OK"
@@ -31,15 +31,15 @@
       },
       "post": {
         "tags": [
-          "investiments"
+          "investments"
         ],
-        "summary": "Post a new investiment",
-        "description": "Create a new investiment, requires to send type, value and date",
+        "summary": "Post a new investment",
+        "description": "Create a new investment, requires to send type, value and date",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Investiment"
+                "$ref": "#/components/schemas/Investment"
               }
             }
           },
@@ -47,7 +47,7 @@
         },
         "responses": {
           "200": {
-            "description": "Successfully created a new investiment"
+            "description": "Successfully created a new investment"
           },
           "400": {
             "description": "Invalid request",
@@ -67,17 +67,17 @@
         }
       }
     },
-    "/api/investiments/{investiment_id}": {
+    "/api/investments/{investment_id}": {
       "delete": {
         "tags": [
-          "investiments"
+          "investments"
         ],
-        "summary": "Deletes an investiment",
+        "summary": "Deletes an investment",
         "parameters": [
           {
-            "name": "investiment_id",
+            "name": "investment_id",
             "in": "path",
-            "description": "Investiment ID that you want to delete",
+            "description": "Investment ID that you want to delete",
             "required": true,
             "schema": {
               "type": "string"
@@ -86,7 +86,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully deleted an investiment"
+            "description": "Successfully deleted an investment"
           },
           "400": {
             "description": "Invalid ID",
@@ -109,7 +109,7 @@
   },
   "components": {
     "schemas": {
-      "Investiment": {
+      "Investment": {
         "type": "object",
         "properties": {
           "id": {

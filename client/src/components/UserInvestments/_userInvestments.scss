@@ -1,4 +1,4 @@
-.investiments {
+.investments {
   @include displayLocal(center);
   align-items: center;
   flex-direction: column;
@@ -48,7 +48,7 @@
 }
 
 @media (max-width: 1000px) {
-  .investiments {
+  .investments {
     .invest-table {
       width: 90vw;
     }

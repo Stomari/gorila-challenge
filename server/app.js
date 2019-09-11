@@ -36,9 +36,9 @@ app.use('/api/v1', router);
 
 
 // Routes
-const investimentRouter = require('./routes/investiment');
+const investmentRouter = require('./routes/investment');
 
-app.use('/api', investimentRouter);
+app.use('/api', investmentRouter);
 
 app.use((req, res, next) => {
   // If no routes match, send them the React HTML.
