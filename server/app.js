@@ -4,6 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const logger = require('morgan');
 const cors = require('cors');
+const path = require('path');
 
 mongoose
   .connect(process.env.MONGODB_URI, { useNewUrlParser: true })
@@ -22,6 +23,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 // Swagger
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
@@ -36,5 +39,10 @@ app.use('/api/v1', router);
 const investimentRouter = require('./routes/investiment');
 
 app.use('/api', investimentRouter);
+
+app.use((req, res, next) => {
+  // If no routes match, send them the React HTML.
+  res.sendFile(`${__dirname}/public/index.html`);
+});
 
 module.exports = app;

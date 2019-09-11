@@ -6,7 +6,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - .:/code
+      - .:/usr/app/server
     depends_on:
     - mongo
   mongo:

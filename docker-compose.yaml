@@ -1,0 +1,31 @@
+version: "3"
+services:
+  server:
+    build: ./server
+    expose:
+      - "8000"
+    environment:
+      PORT: "8000"
+      MONGODB_URI: mongodb://mongo:27017/gorila
+    command: npm start
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./server:/usr/app/server
+    depends_on:
+    - mongo
+  mongo:
+    image: mongo
+    ports:
+    - "27017:27017"
+  client:
+    build: ./client
+    expose:
+      - "3000"
+    environment: 
+      REACT_APP_API_URL: http://localhost:8000
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./client:/usr/app/client
+      - /usr/app/client/node_modules/
