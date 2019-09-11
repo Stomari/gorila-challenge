@@ -2,7 +2,8 @@
 FROM node:alpine
 
 # Set the working directory to /app
-WORKDIR /usr/app
+RUN mkdir -p /usr/app/server
+WORKDIR /usr/app/server
 
 # Copy the current directory contents into the container at /app
 COPY ["package.json", "package-lock.json*", "./"]
