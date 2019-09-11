@@ -98,6 +98,6 @@ This project is divided in client and server side. After downloading or cloning 
         - Requires type, value and date.
     <br>
 
-    - **Delete an investiment:**
+    - **(DELETE) Delete an investiment:**
 `https://gorila-test.herokuapp.com/api/investiments/{investiment_ID}`
 
