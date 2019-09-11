@@ -2,8 +2,7 @@ const request = require('supertest');
 const chai = require('chai');
 const mongoose = require('mongoose');
 const app = require('../app');
-const Laboratory = require('../models/Laboratory');
-const Exam = require('../models/Exam');
+const Investiment = require('../models/Investiment');
 
 const { expect } = chai;
 
@@ -12,15 +11,15 @@ before((done) => {
     .connect('mongodb://localhost/test', { useNewUrlParser: true })
     .then((db) => {
       console.log(`Connected to Mongo! Database name: "${db.connections[0].name}"`);
-      Laboratory.collection.remove()
+      Investiment.collection.remove()
         .then(() => {
-          const newLaboratory = new Laboratory({
-            name: 'Lab',
-            address: 'Street',
-            status: 'ativo',
+          const newInvestiment = new Investiment({
+            type: 'fixa',
+            value: 'R$100,00',
+            date: '2019-09-01',
           });
 
-          newLaboratory.save()
+          newInvestiment.save()
             .then(() => done())
             .catch((error) => console.log(error));
 
@@ -32,64 +31,46 @@ before((done) => {
     });
 });
 
-describe('Laboratory routes', () => {
-  describe('GET /laboratory', () => {
-    it('should return all active laboratories', (done) => {
-      request(app).get('/api/laboratory')
+describe('Investiment routes', () => {
+  describe('GET /investiments', () => {
+    it('should return all investiments', (done) => {
+      request(app).get('/api/investiments')
         .end((err, res) => {
           if (err) throw err;
           expect(res.status).to.equal(200);
           expect(res.body).to.be.an('array');
-          expect(res.body[0].name).to.be.equal('Lab');
-          expect(res.body[0].address).to.be.equal('Street');
-          expect(res.body[0].status).to.be.equal('ativo');
+          expect(res.body[0].type).to.be.equal('fixa');
+          expect(res.body[0].value).to.be.equal('R$100,00');
+          expect(res.body[0].date).to.be.equal('2019-09-01');
           done();
         });
     });
   });
 
-  describe('POST /create/laboratory', () => {
-    it('should create a laboratory', (done) => {
-      request(app).post('/api/create/laboratory')
-        .send({ name: 'Lab2', address: 'Street2' })
+  describe('POST /investiments', () => {
+    it('should create an investiments', (done) => {
+      request(app).post('/api/investiments')
+        .send({ type: 'variavel', value: '200', date: '2019-09-02' })
         .end((err, res) => {
           if (err) throw err;
           expect(res.status).to.equal(200);
           expect(res.body).to.be.an('object');
-          expect(res.body.message).to.be.equal('Lab2 created!');
+          expect(res.body.message).to.be.equal('Investiment created!');
           done();
         });
     });
   });
 
-  describe('PUT /edit/laboratory/:laboratoryID', () => {
-    it('should edit specified laboratory', (done) => {
-      Laboratory.findOne({ name: 'Lab' })
-        .then((lab) => {
-          request(app).put(`/api/edit/laboratory/${lab.id}`)
-            .send({ name: 'LabEdited', address: 'StreetEdited', status: 'inativo' })
+  describe('DELETE /investiments/:investimentID', () => {
+    it('should delete specified investiment', (done) => {
+      Investiment.findOne({ value: 'R$100,00' })
+        .then((response) => {
+          request(app).delete(`/api/investiments/${response.id}`)
             .end((err, res) => {
               if (err) throw err;
               expect(res.status).to.equal(200);
               expect(res.body).to.be.an('object');
-              expect(res.body.message).to.be.equal(`Laboratory with ID ${lab.id} updated successfully.`);
-              done();
-            });
-        })
-        .catch((error) => console.log(error));
-    });
-  });
-
-  describe('DELETE /delete/laboratory/:laboratoryID', () => {
-    it('should delete specified laboratory', (done) => {
-      Laboratory.findOne({ name: 'Lab2' })
-        .then((lab) => {
-          request(app).delete(`/api/delete/laboratory/${lab.id}`)
-            .end((err, res) => {
-              if (err) throw err;
-              expect(res.status).to.equal(200);
-              expect(res.body).to.be.an('object');
-              expect(res.body.message).to.be.equal(`Laboratory with ID ${lab.id} deleted successfully.`);
+              expect(res.body.message).to.be.equal(`Investiment with ID ${response.id} deleted successfully.`);
               done();
             });
         })

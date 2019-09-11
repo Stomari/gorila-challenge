@@ -46,7 +46,7 @@ router.post('/investiments', (req, res) => {
   });
 
   newInvestiment.save()
-    .then((response) => res.json({ message: `${response.name} created!` }))
+    .then(() => res.json({ message: 'Investiment created!' }))
     .catch((error) => res.json(error));
 });
 
