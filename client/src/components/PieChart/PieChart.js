@@ -11,11 +11,11 @@ const PieChart = ({ fixedIncome, variableIncome }) => {
         <div className="pie-info">
           <div className="row">
             <div className="fixed-legend"></div>
-            <h4><strong>{fixedPercentage}%</strong> da carteira em renda fixa</h4>
+            <h4 className="fixed-percentage"><strong>{fixedPercentage}%</strong> da carteira em renda fixa</h4>
           </div>
           <div className="row">
             <div className="variable-legend"></div>
-            <h4><strong>{variablePercentage}%</strong> da carteira em renda variável</h4>
+            <h4 className="variable-percentage"><strong>{variablePercentage}%</strong> da carteira em renda variável</h4>
           </div>
         </div>
         <ReactChart className="chart" data={[
