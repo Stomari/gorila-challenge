@@ -4,7 +4,7 @@
 
 ---
 
-In this project, created as part of Gorila Invest admission test, I've created a full stack app where you can register your investiments and see all of them in a table and pie chart. To do so, I've used Node.js to build a REST API and React to make the front-end. 
+In this project, created as part of Gorila Invest admission test, I've created a full stack app where you can register your investments and see all of them in a table and pie chart. To do so, I've used Node.js to build a REST API and React to make the front-end. 
 
 ---
 
@@ -90,14 +90,14 @@ This project is divided in client and server side. After downloading or cloning 
 
         note: if running locally use localhost url rather than heroku url.
 
-    - **(GET) Show all investiments:**
-`https://gorila-test.herokuapp.com/api/investiments`
+    - **(GET) Show all investments:**
+`https://gorila-test.herokuapp.com/api/investments`
     <br><br>
-    - **(POST) Register a new investiment:** 
-`https://gorila-test.herokuapp.com/api/investiments`
+    - **(POST) Register a new investment:** 
+`https://gorila-test.herokuapp.com/api/investments`
         - Requires type, value and date.
     <br>
 
-    - **(DELETE) Delete an investiment:**
-`https://gorila-test.herokuapp.com/api/investiments/{investiment_ID}`
+    - **(DELETE) Delete an investment:**
+`https://gorila-test.herokuapp.com/api/investments/{investment_ID}`
 
