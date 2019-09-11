@@ -1,56 +1,65 @@
 {
-  "openapi" : "3.0.0",
-  "info" : {
-    "title" : "Backend Test - DASA",
-    "description" : "API developed for DASA backend test",
-    "version" : "1.0.0"
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Gorila Test",
+    "description": "API developed for Gorila Fullstack test"
   },
-  "servers" : [ {
-    "url" : "https://dasa-backend.herokuapp.com",
-    "description" : "Backend Challenge API"
-  } ],
-  "tags" : [ {
-    "name" : "laboratory"
-  }, {
-    "name" : "exam"
-  } ],
-  "paths" : {
-    "/api/laboratory" : {
-      "get" : {
-        "tags" : [ "laboratory" ],
-        "summary" : "Returns all active laboratories",
-        "responses" : {
-          "200" : {
-            "description" : "OK"
+  "servers": [
+    {
+      "description": "Gorila API",
+      "url": "https://gorila-test.herokuapp.com"
+    }
+  ],
+  "tags": [
+    {
+      "name": "investiments"
+    }
+  ],
+  "paths": {
+    "/api/investiments": {
+      "get": {
+        "tags": [
+          "investiments"
+        ],
+        "summary": "Returns all Investiments",
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
-      }
-    },
-    "/api/create/laboratory" : {
-      "post" : {
-        "tags" : [ "laboratory" ],
-        "summary" : "Post a new laboratory",
-        "description" : "Register a new laboratory, requires to pass a name and address",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/Laboratory"
+      },
+      "post": {
+        "tags": [
+          "investiments"
+        ],
+        "summary": "Post a new investiment",
+        "description": "Create a new investiment, requires to send type, value and date",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Investiment"
               }
             }
           },
-          "required" : true
+          "required": true
         },
-        "responses" : {
-          "200" : {
-            "description" : "Successfully created a new laboratory"
+        "responses": {
+          "200": {
+            "description": "Successfully created a new investiment"
           },
-          "400" : {
-            "description" : "Invalid request",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_400"
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
@@ -58,276 +67,38 @@
         }
       }
     },
-    "/api/edit/laboratory/{laboratory_id}" : {
-      "put" : {
-        "tags" : [ "laboratory" ],
-        "summary" : "Edit a laboratory",
-        "description" : "Edit a laboratory, requires to pass a name, address and status",
-        "parameters" : [ {
-          "name" : "laboratory_id",
-          "in" : "path",
-          "description" : "Laboratory ID that you want to edit",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/Laboratory"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "200" : {
-            "description" : "Successfully edited a laboratory"
-          },
-          "400" : {
-            "description" : "Invalid request",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_400"
-                }
-              }
+    "/api/investiments/{investiment_id}": {
+      "delete": {
+        "tags": [
+          "investiments"
+        ],
+        "summary": "Deletes an investiment",
+        "parameters": [
+          {
+            "name": "investiment_id",
+            "in": "path",
+            "description": "Investiment ID that you want to delete",
+            "required": true,
+            "schema": {
+              "type": "string"
             }
           }
-        }
-      }
-    },
-    "/api/delete/laboratory/{laboratory_id}" : {
-      "delete" : {
-        "tags" : [ "laboratory" ],
-        "summary" : "Deletes a laboratory",
-        "parameters" : [ {
-          "name" : "laboratory_id",
-          "in" : "path",
-          "description" : "Laboratory ID that you want to delete",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "Successfully deleted a laboratory"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted an investiment"
           },
-          "400" : {
-            "description" : "Invalid ID",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_400"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/add/{exam_id}/to-lab/{laboratory_id}" : {
-      "put" : {
-        "tags" : [ "laboratory" ],
-        "summary" : "Adds an exam to a laboratory",
-        "parameters" : [ {
-          "name" : "laboratory_id",
-          "in" : "path",
-          "description" : "Laboratory ID that you want to add the exam",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "exam_id",
-          "in" : "path",
-          "description" : "Exam ID that you want to add",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "Successfully added exam to a laboratory"
-          },
-          "400" : {
-            "description" : "Invalid ID",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_400"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/remove/{exam_id}/from-lab/{laboratory_id}" : {
-      "put" : {
-        "tags" : [ "laboratory" ],
-        "summary" : "Remove an exam from a laboratory",
-        "parameters" : [ {
-          "name" : "laboratory_id",
-          "in" : "path",
-          "description" : "Laboratory ID that you want to remove the exam",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string"
-          }
-        }, {
-          "name" : "exam_id",
-          "in" : "path",
-          "description" : "Exam ID that you want to remove",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "Successfully removed exam from a laboratory"
-          },
-          "400" : {
-            "description" : "Invalid ID",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_400"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/exam" : {
-      "get" : {
-        "tags" : [ "exam" ],
-        "summary" : "Returns all active exams",
-        "responses" : {
-          "200" : {
-            "description" : "OK"
-          }
-        }
-      }
-    },
-    "/api/create/exam" : {
-      "post" : {
-        "tags" : [ "exam" ],
-        "summary" : "Post a new exam",
-        "description" : "Register a new exam, requires to pass a name and type",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/Exam"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "200" : {
-            "description" : "Successfully created a new exam"
-          },
-          "400" : {
-            "description" : "Invalid request",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_400"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/edit/exam/{exam_id}" : {
-      "put" : {
-        "tags" : [ "exam" ],
-        "summary" : "Edit a exam",
-        "description" : "Edit a exam, requires to pass a name, type and status",
-        "parameters" : [ {
-          "name" : "exam_id",
-          "in" : "path",
-          "description" : "Exam ID that you want to edit",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/Exam"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "200" : {
-            "description" : "Successfully edited an exam"
-          },
-          "400" : {
-            "description" : "Invalid request",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_400"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/delete/exam/{exam_id}" : {
-      "delete" : {
-        "tags" : [ "exam" ],
-        "summary" : "Deletes a exam",
-        "parameters" : [ {
-          "name" : "exam_id",
-          "in" : "path",
-          "description" : "Exam ID that you want to delete",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "Successfully deleted an exam"
-          },
-          "400" : {
-            "description" : "Invalid ID",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/inline_response_400"
+          "400": {
+            "description": "Invalid ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
@@ -336,56 +107,26 @@
       }
     }
   },
-  "components" : {
-    "schemas" : {
-      "Laboratory" : {
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "type" : "string"
+  "components": {
+    "schemas": {
+      "Investiment": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
           },
-          "name" : {
-            "type" : "string"
+          "type": {
+            "type": "string",
+            "enum": [
+              "fixa",
+              "variavel"
+            ]
           },
-          "address" : {
-            "type" : "string"
+          "value": {
+            "type": "string"
           },
-          "status" : {
-            "type" : "string",
-            "enum" : [ "ativo", "inativo" ]
-          },
-          "activeExams" : {
-            "type" : "array",
-            "items" : {
-              "type" : "object"
-            }
-          }
-        }
-      },
-      "Exam" : {
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "type" : "string"
-          },
-          "name" : {
-            "type" : "string"
-          },
-          "type" : {
-            "type" : "string",
-            "enum" : [ "analise clinica", "imagem" ]
-          },
-          "status" : {
-            "type" : "string",
-            "enum" : [ "ativo", "inativo" ]
-          }
-        }
-      },
-      "inline_response_400" : {
-        "type" : "object",
-        "properties" : {
-          "message" : {
-            "type" : "string"
+          "date": {
+            "type": "string"
           }
         }
       }
