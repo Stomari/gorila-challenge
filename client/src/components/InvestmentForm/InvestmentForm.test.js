@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import InvestimentForm from './InvestimentForm';
+import InvestmentForm from './InvestmentForm';
 
-describe('InvestimentForm', () => {
-  const component = shallow(<InvestimentForm />);
+describe('InvestmentForm', () => {
+  const component = shallow(<InvestmentForm />);
 
   it('should render', () => {
     expect(component).toMatchSnapshot();

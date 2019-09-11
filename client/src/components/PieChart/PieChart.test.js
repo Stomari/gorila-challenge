@@ -41,11 +41,11 @@ describe('PieChart rendering with props', () => {
     expect(component.find('.pie-info').length).toEqual(1);
   });
 
-  it('should render correct fixed investiments percentage', () => {
+  it('should render correct fixed investments percentage', () => {
     expect(component.find('.fixed-percentage').text()).toEqual('50% da carteira em renda fixa');
   });
 
-  it('should render correct variable investiments percentage', () => {
+  it('should render correct variable investments percentage', () => {
     expect(component.find('.variable-percentage').text()).toEqual('50% da carteira em renda variável');
   });
 

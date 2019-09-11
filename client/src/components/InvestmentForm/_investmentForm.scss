@@ -1,4 +1,4 @@
-.investiment-form {
+.investment-form {
   @include displayLocal(center);
 
   form {
@@ -43,7 +43,7 @@
 }
 
 @media (max-width: 1000px) {
-  .investiment-form {
+  .investment-form {
     .form-inputs {
       flex-direction: column;
       .inputs {

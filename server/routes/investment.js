@@ -1,18 +1,18 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const Investiment = require('../models/Investiment');
+const Investment = require('../models/Investment');
 
 const router = express.Router();
 
-/* GET all investiments. */
-router.get('/investiments', (req, res) => {
-  Investiment.find()
+/* GET all investments. */
+router.get('/investments', (req, res) => {
+  Investment.find()
     .then((response) => res.json(response))
     .catch((error) => res.json(error));
 });
 
 /* POST register a new investment. */
-router.post('/investiments', (req, res) => {
+router.post('/investments', (req, res) => {
   let { type, value, date } = req.body;
 
   // Currency transformation logic.
@@ -39,28 +39,28 @@ router.post('/investiments', (req, res) => {
     return;
   }
 
-  const newInvestiment = new Investiment({
+  const newInvestment = new Investment({
     type,
     value,
     date,
   });
 
-  newInvestiment.save()
-    .then(() => res.json({ message: 'Investiment created!' }))
+  newInvestment.save()
+    .then(() => res.json({ message: 'Investment created!' }))
     .catch((error) => res.json(error));
 });
 
-/* DELETE an investiment. */
-router.delete('/investiments/:investimentID', (req, res) => {
-  const { investimentID } = req.params;
+/* DELETE an investment. */
+router.delete('/investments/:investmentID', (req, res) => {
+  const { investmentID } = req.params;
 
-  if (!mongoose.Types.ObjectId.isValid(investimentID)) {
+  if (!mongoose.Types.ObjectId.isValid(investmentID)) {
     res.status(400).json({ message: 'Specified id is not valid' });
     return;
   }
 
-  Investiment.findByIdAndDelete(investimentID)
-    .then(() => res.json({ message: `Investiment with ID ${investimentID} deleted successfully.` }))
+  Investment.findByIdAndDelete(investmentID)
+    .then(() => res.json({ message: `Investment with ID ${investmentID} deleted successfully.` }))
     .catch((error) => res.json(error));
 });
 
